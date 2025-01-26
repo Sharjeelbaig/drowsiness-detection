@@ -4,6 +4,8 @@ import time
 import numpy as np
 import os
 import sys
+
+os.system("rm -r photos/*")
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../config')))
 
 from config import EAR_THRESHOLD, MAR_THRESHOLD, PERCLOS_THRESHOLD, ALERT_INTERVAL
@@ -90,6 +92,11 @@ while True:
         if faces:
             face = faces[0]
             tracker.start_track(gray, face)
+
+     # write ppng to ../photos/1.png, ../photos/2.png, ...
+    cv2.imwrite(f'../photos/{TOTAL_FRAMES}.png', gray)
+
+    
 
     # Show the frame
     cv2.imshow("Drowsiness Detector", gray)
