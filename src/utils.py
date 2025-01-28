@@ -41,7 +41,7 @@ def face_recognize(frame):
         return False
     
 
-def draw_frame_rectanguler(frame, pos):
+def draw_frame_rectanguler(frame, pos, text):
     # Define target rectangle parameters
     center_x = int((pos.left() + pos.right()) / 2)
     center_y = int((pos.top() + pos.bottom()) / 2)
@@ -67,8 +67,17 @@ def draw_frame_rectanguler(frame, pos):
     cv2.line(frame, (int(pos.right()), int(pos.bottom())), (int(pos.right() - corner_length), int(pos.bottom())), (0, 255, 0), 2)
     cv2.line(frame, (int(pos.right()), int(pos.bottom())), (int(pos.right()), int(pos.bottom() - corner_length)), (0, 255, 0), 2)
 
+    # Draw text below the crosshair
+    font = cv2.FONT_HERSHEY_SIMPLEX
+    text_size = cv2.getTextSize(text, font, 0.8, 2)[0]
+    text_x = center_x - text_size[0] // 2  # Center the text
+    text_y = center_y + height // 2 + 20  # Position below the crosshair
+    cv2.putText(frame, text, (text_x, text_y), font, 0.8, (0, 255, 0), 2, cv2.LINE_AA)
 
-    
+
+
+
+
 
 import os
 
